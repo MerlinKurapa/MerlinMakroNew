@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merlin Makro Launcher</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid"></div>
+  </div>
+
+  <div class="app">
+    <div class="titlebar">
+      <div class="brand">
+        <div class="logo">M</div>
+        <div>
+          <div class="brand-title">Merlin Makro</div>
+          <div class="brand-sub">Launcher v5.1</div>
+        </div>
+      </div>
+      <button class="icon-btn" id="btn-close" title="Kapat">✕</button>
+    </div>
+
+    <div class="card" id="login-card">
+      <h1>Hoş Geldin</h1>
+      <p class="subtitle">Hesabına giriş yap ve makroyu başlat</p>
+
+      <div id="status" class="status hidden"></div>
+
+      <form id="login-form" autocomplete="off" onsubmit="return false;">
+        <label>E-posta</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="ornek@email.com"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          name="merlin_email_field"
+        />
+
+        <label>Şifre</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="••••••••"
+          autocomplete="new-password"
+          name="merlin_password_field"
+        />
+
+        <label class="checkbox-row">
+          <input id="remember" type="checkbox" />
+          <span>Beni hatırla</span>
+        </label>
+
+        <button id="btn-login" class="primary" type="button">
+          <span class="btn-icon">➜</span>
+          Giriş Yap
+        </button>
+      </form>
+    </div>
+
+    <div class="card hidden" id="loading-card">
+      <div class="spinner"></div>
+      <h2 id="loading-text">Oturum açılıyor...</h2>
+      <p class="subtitle">Hesabın doğrulanıyor</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
