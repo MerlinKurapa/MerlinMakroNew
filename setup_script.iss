@@ -1,6 +1,6 @@
 [Setup]
 AppName=Merlin Makro
-AppVersion=5.4
+AppVersion=5.5
 DefaultDirName={commonpf}\MerlinMakro
 DefaultGroupName=Merlin Makro
 OutputBaseFilename=MerlinMakro_Setup
