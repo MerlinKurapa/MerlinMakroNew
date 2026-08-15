@@ -1,6 +1,6 @@
 [Setup]
 AppName=Merlin Makro
-AppVersion=5.1
+AppVersion=5.3
 DefaultDirName={commonpf}\MerlinMakro
 DefaultGroupName=Merlin Makro
 OutputBaseFilename=MerlinMakro_Setup
@@ -16,6 +16,7 @@ LicenseFile=
 UninstallDisplayIcon={app}\Launcher.exe
 SetupIconFile=MerlinMakro.ico
 OutputDir=Output
+UninstallFilesDir={app}
 
 [Files]
 Source: "Launcher.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -34,3 +35,5 @@ Filename: "{app}\Launcher.exe"; Description: "Launch Merlin Makro"; Flags: nowai
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}"
+Type: filesandordirs; Name: "{commondesktop}\Merlin Makro.lnk"
+Type: filesandordirs; Name: "{userdesktop}\Merlin Makro.lnk"
