@@ -249,11 +249,20 @@ def download_update(save_path):
                 download_url = setup_asset.get("browser_download_url")
                 urllib.request.urlretrieve(download_url, save_path)
 
-                # İndirme başarılı, setup'ı çalıştır ve uygulamayı kapat
-                print("Update downloaded, launching setup...")
+                # İndirme başarılı
+                print("Update downloaded, starting uninstall...")
+
+                # 1. Önce uninstall çalıştır (eski sürümü kaldır)
+                uninstall_path = r"C:\Program Dosyaları (x86)\MerlinMakro\unins000.exe"
+                if os.path.exists(uninstall_path):
+                    subprocess.Popen([uninstall_path, "/SILENT"], shell=True)
+                    time.sleep(3)  # Uninstall'ın tamamlanması için bekle
+
+                # 2. Yeni setup'ı çalıştır
+                print("Installing new version...")
                 subprocess.Popen([save_path, "/VERYSILENT", "/SUPPRESSMSGBOXES"], shell=True)
 
-                # Uygulamayı kapat
+                # 3. Uygulamayı kapat
                 if getattr(sys, "frozen", False):
                     # PyInstaller ile derlenmiş
                     os.system("taskkill /F /IM MerlinMakro.exe")
