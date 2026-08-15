@@ -1,6 +1,6 @@
 [Setup]
 AppName=Merlin Makro
-AppVersion=5.8
+AppVersion=6.0
 DefaultDirName={commonpf}\MerlinMakro
 DefaultGroupName=Merlin Makro
 OutputBaseFilename=MerlinMakro_Setup
@@ -27,7 +27,7 @@ Name: "{group}\Merlin Makro"; Filename: "{app}\Launcher.exe"; IconFilename: "{ap
 Name: "{commondesktop}\Merlin Makro"; Filename: "{app}\Launcher.exe"; IconFilename: "{app}\MerlinMakro.ico"; Tasks: desktopicon
 
 [Tasks]
-Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"; Flags: unchecked
+Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
 
 [Run]
 Filename: "{app}\Launcher.exe"; Description: "Launch Merlin Makro"; Flags: nowait postinstall
