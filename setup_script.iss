@@ -24,10 +24,9 @@ Source: "MerlinMakro.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\Merlin Makro"; Filename: "{app}\Launcher.exe"; IconFilename: "{app}\MerlinMakro.ico"
-Name: "{commondesktop}\Merlin Makro"; Filename: "{app}\Launcher.exe"; IconFilename: "{app}\MerlinMakro.ico"; Tasks: desktopicon
+Name: "{commondesktop}\Merlin Makro"; Filename: "{app}\Launcher.exe"; IconFilename: "{app}\MerlinMakro.ico"
 
-[Tasks]
-Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
+
 
 [Run]
 Filename: "{app}\Launcher.exe"; Description: "Launch Merlin Makro"; Flags: nowait postinstall
