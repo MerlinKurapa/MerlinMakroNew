@@ -11,6 +11,7 @@ a = Analysis(
     datas=[
         ('ui/launcher', 'ui/launcher'),
         ('MerlinMakro.ico', '.'),
+        ('merlinmakroauth-firebase-adminsdk-fbsvc-df7571c065.json', '.'),
     ],
     hiddenimports=['webview', 'clr', 'cryptography.fernet', 'requests', 'firebase_admin', 'google.cloud.firestore'],
     hookspath=[],
