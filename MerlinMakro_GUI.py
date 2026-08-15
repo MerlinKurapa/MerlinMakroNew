@@ -425,7 +425,9 @@ class MacroEngine:
                 space_timer = time.time()
 
     def start_item(self, run_count=1):
+        print(f"start_item called with run_count={run_count}")
         if self.running:
+            print("Already running, returning")
             return
         self.bag_running = False
         self.skill_running = False
@@ -434,6 +436,7 @@ class MacroEngine:
         self.status = "Item Aktif"
         self._push_status()
         coords = self.active_points()
+        print(f"Active points: {coords}")
         if not coords:
             self.status = "Aktif koordinat yok"
             self.running = False
@@ -591,10 +594,12 @@ class MacroApi:
 
 
 def setup_hotkeys():
+    print("Setting up hotkeys...")
     keyboard.add_hotkey("f2", ENGINE.start_item)
     keyboard.add_hotkey("f3", ENGINE.toggle_bag)
     keyboard.on_press_key(79, lambda _: ENGINE.toggle_skill())
     keyboard.add_hotkey("f6", ENGINE.capture_once)
+    print("Hotkeys setup complete")
 
 
 def bootstrap_and_run():
