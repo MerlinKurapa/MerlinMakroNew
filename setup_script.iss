@@ -20,9 +20,6 @@ OutputDir=Output
 [Files]
 Source: "Launcher.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "MerlinMakro.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MerlinGuard_Launcher.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MerlinGuard_Launcher.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MerlinGuard_Code.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "MerlinMakro.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]

@@ -4,18 +4,13 @@ import subprocess
 import sys
 import threading
 import time
-from datetime import datetime
 
 import webview
-
-import firebase_admin
-from firebase_admin import credentials, firestore
 
 from auth_utils import (
     APPDATA_PATH,
     TOKEN_PATH,
     clear_session,
-    get_hwid,
     get_remembered_email,
     login_async,
     try_auto_login,
@@ -45,39 +40,7 @@ def exe_dir():
     return os.path.dirname(os.path.abspath(__file__))
 
 
-def init_firebase():
-    firebase_json = resource_path(
-        "merlinmakroauth-firebase-adminsdk-fbsvc-df7571c065.json"
-    )
-    cred = credentials.Certificate(firebase_json)
-    if not firebase_admin._apps:
-        firebase_admin.initialize_app(cred)
-    return firestore.client()
 
-
-def check_firebase_hwid(db, user_email):
-    hwid = get_hwid()
-    user_doc = db.collection("users").document(user_email).get()
-    if not user_doc.exists:
-        raise RuntimeError("Kullanıcı Firebase'de bulunamadı.")
-
-    data = user_doc.to_dict()
-    doc_ref = db.collection("users").document(user_email)
-
-    if not data.get("aktif"):
-        raise RuntimeError("Hesap aktif değil.")
-
-    son_kullanma = data.get("son_kullanma_tarihi")
-    if son_kullanma:
-        bitis = datetime.strptime(son_kullanma, "%Y-%m-%d")
-        if datetime.now() > bitis:
-            raise RuntimeError("Makro lisans süreniz sona ermiş.")
-
-    saved_hwid = data.get("hwid")
-    if not saved_hwid:
-        doc_ref.update({"hwid": hwid})
-    elif saved_hwid != hwid:
-        raise RuntimeError("Bu lisans başka bir bilgisayara ait.")
 
 
 def launch_macro(email):
