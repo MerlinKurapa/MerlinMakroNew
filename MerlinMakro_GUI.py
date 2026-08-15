@@ -88,7 +88,7 @@ def anti_debug():
             pass
 
 
-anti_debug()
+# anti_debug()  # Temporarily disabled for debugging
 
 
 # ================= LAUNCHER LOCK =================
@@ -476,6 +476,8 @@ class MacroEngine:
 
 ENGINE = MacroEngine()
 DB = None
+print("ENGINE initialized:", ENGINE)
+print("ENGINE.start_item:", ENGINE.start_item)
 
 
 class MacroApi:
