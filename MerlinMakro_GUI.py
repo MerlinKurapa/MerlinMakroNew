@@ -88,7 +88,7 @@ def anti_debug():
             pass
 
 
-# anti_debug()  # Temporarily disabled for debugging
+anti_debug()
 
 
 # ================= LAUNCHER LOCK =================
