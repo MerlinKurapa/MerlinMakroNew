@@ -1,6 +1,6 @@
 [Setup]
 AppName=Merlin Makro
-AppVersion=5.1
+AppVersion=5.6
 DefaultDirName={commonpf}\MerlinMakro
 DefaultGroupName=Merlin Makro
 OutputBaseFilename=MerlinMakro_Setup
@@ -20,9 +20,6 @@ OutputDir=Output
 [Files]
 Source: "Launcher.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "MerlinMakro.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MerlinGuard_Launcher.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MerlinGuard_Launcher.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MerlinGuard_Code.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "MerlinMakro.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
@@ -37,3 +34,5 @@ Filename: "{app}\Launcher.exe"; Description: "Launch Merlin Makro"; Flags: nowai
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}"
+Type: filesandordirs; Name: "{commondesktop}\Merlin Makro.lnk"
+Type: filesandordirs; Name: "{userdesktop}\Merlin Makro.lnk"
