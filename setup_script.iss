@@ -31,7 +31,7 @@ Name: "{commondesktop}\Merlin Makro"; Filename: "{app}\Launcher.exe"; IconFilena
 Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"; Flags: unchecked
 
 [Run]
-Filename: "{app}\Launcher.exe"; Description: "Launch Merlin Makro"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\Launcher.exe"; Description: "Launch Merlin Makro"; Flags: nowait postinstall
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}"
