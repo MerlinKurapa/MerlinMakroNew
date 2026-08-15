@@ -24,7 +24,6 @@ Source: "MerlinGuard_Launcher.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "MerlinGuard_Launcher.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "MerlinGuard_Code.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "MerlinMakro.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "merlinmakroauth-firebase-adminsdk-fbsvc-df7571c065.json"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\Merlin Makro"; Filename: "{app}\Launcher.exe"; IconFilename: "{app}\MerlinMakro.ico"

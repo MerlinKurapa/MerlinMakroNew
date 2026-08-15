@@ -167,7 +167,20 @@ html, body {
 .update-btn { margin-top: 8px; border-color: rgba(34, 211, 238, 0.5); }
 .update-btn.hidden { display: none; }
 
-.coord-toolbar { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.coord-toolbar { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+
+.live-coords {
+  margin-left: auto;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 600;
+  min-width: 80px;
+  text-align: center;
+}
 
 .mini {
   padding: 7px 10px;
@@ -295,3 +308,19 @@ input[type="number"] {
 }
 
 #status { color: var(--accent); font-weight: 700; }
+
+.rgb-text {
+  font-weight: 700;
+  background: linear-gradient(90deg, #34d399, #22d3ee, #6366f1, #34d399);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rgb-animation 3s ease infinite;
+}
+
+@keyframes rgb-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

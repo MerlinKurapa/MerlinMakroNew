@@ -487,6 +487,14 @@ class MacroApi:
             "top_status": ENGINE.top_status,
         }
 
+    def get_mouse_coords(self):
+        """Mevcut mouse koordinatlarını al"""
+        try:
+            x, y = pdi.position()
+            return {"x": int(x), "y": int(y)}
+        except Exception:
+            return {"x": 0, "y": 0}
+
     def check_update(self):
         """Güncelleme kontrolü yap"""
         def worker():

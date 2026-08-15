@@ -137,10 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await api.save_coords();
     toast("Koordinatlar kaydedildi");
   };
-  $("btn-capture-toggle").onclick = () => {
-    console.log("Canlı takip butonuna tıklandı");
-    api.toggle_capture();
-  };
+
   $("btn-save-settings").onclick = async () => {
     await api.save_settings();
     toast("Makro ayarları kaydedildi");
@@ -164,6 +161,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     statusEl.textContent = "Güncelleme indiriliyor...";
     api.download_update();
   };
+
+  // Canlı mouse koordinatları
+  setInterval(async () => {
+    try {
+      const coords = await api.get_mouse_coords();
+      const coordsEl = $("live-coords");
+      if (coordsEl) {
+        coordsEl.textContent = `X: ${coords.x}, Y: ${coords.y}`;
+      }
+    } catch (e) {
+      console.error("Mouse coords error:", e);
+    }
+  }, 100); // Her 100ms'de bir güncelle
 
   const state = await api.get_state();
   $("user-email").textContent = state.email || "";

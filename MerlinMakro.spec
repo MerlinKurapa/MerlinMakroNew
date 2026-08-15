@@ -11,7 +11,6 @@ a = Analysis(
     datas=[
         ('ui/macro', 'ui/macro'),
         ('MerlinMakro.ico', '.'),
-        ('merlinmakroauth-firebase-adminsdk-fbsvc-df7571c065.json', '.'),
     ],
     hiddenimports=[
         'webview',
