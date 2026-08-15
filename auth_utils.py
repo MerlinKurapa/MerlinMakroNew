@@ -202,7 +202,7 @@ def login_async(email, password, remember_me, on_success, on_error):
 
 # GitHub Update System
 GITHUB_REPO = "MerlinKurapa/MerlinMakroNew"  # GitHub repository bilgisi
-CURRENT_VERSION = "5.6"  # Mevcut sürüm - her güncellemede bunu değiştirin
+CURRENT_VERSION = "5.7"  # Mevcut sürüm - her güncellemede bunu değiştirin
 
 
 def check_github_update():
@@ -229,7 +229,7 @@ def check_github_update():
 
 
 def download_update(save_path):
-    """Güncellemeyi indir"""
+    """Güncellemeyi indir ve kur"""
     try:
         # GitHub assets'tan setup dosyasını bul
         url = f"https://api.github.com/repos/{GITHUB_REPO}/releases/latest"
@@ -237,17 +237,40 @@ def download_update(save_path):
         if response.status_code == 200:
             release_data = response.json()
             assets = release_data.get("assets", [])
-            
+
             # Setup dosyasını bul
             setup_asset = None
             for asset in assets:
                 if "setup" in asset.get("name", "").lower():
                     setup_asset = asset
                     break
-            
+
             if setup_asset:
                 download_url = setup_asset.get("browser_download_url")
                 urllib.request.urlretrieve(download_url, save_path)
+
+                # İndirme başarılı
+                print("Update downloaded, starting uninstall...")
+
+                # 1. Önce uninstall çalıştır (eski sürümü kaldır)
+                uninstall_path = r"C:\Program Files (x86)\MerlinMakro\unins000.exe"
+                if os.path.exists(uninstall_path):
+                    subprocess.Popen([uninstall_path, "/SILENT"], shell=True)
+                    time.sleep(3)  # Uninstall'ın tamamlanması için bekle
+
+                # 2. Yeni setup'ı çalıştır
+                print("Installing new version...")
+                subprocess.Popen([save_path, "/VERYSILENT", "/SUPPRESSMSGBOXES"], shell=True)
+
+                # 3. Uygulamayı kapat
+                if getattr(sys, "frozen", False):
+                    # PyInstaller ile derlenmiş
+                    os.system("taskkill /F /IM MerlinMakro.exe")
+                    os.system("taskkill /F /IM Launcher.exe")
+                else:
+                    # Geliştirme modu
+                    os._exit(0)
+
                 return True
     except Exception as e:
         print(f"Download failed: {e}")
