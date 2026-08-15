@@ -229,7 +229,7 @@ def check_github_update():
 
 
 def download_update(save_path):
-    """Güncellemeyi indir"""
+    """Güncellemeyi indir ve kur"""
     try:
         # GitHub assets'tan setup dosyasını bul
         url = f"https://api.github.com/repos/{GITHUB_REPO}/releases/latest"
@@ -237,17 +237,31 @@ def download_update(save_path):
         if response.status_code == 200:
             release_data = response.json()
             assets = release_data.get("assets", [])
-            
+
             # Setup dosyasını bul
             setup_asset = None
             for asset in assets:
                 if "setup" in asset.get("name", "").lower():
                     setup_asset = asset
                     break
-            
+
             if setup_asset:
                 download_url = setup_asset.get("browser_download_url")
                 urllib.request.urlretrieve(download_url, save_path)
+
+                # İndirme başarılı, setup'ı çalıştır ve uygulamayı kapat
+                print("Update downloaded, launching setup...")
+                subprocess.Popen([save_path, "/VERYSILENT", "/SUPPRESSMSGBOXES"], shell=True)
+
+                # Uygulamayı kapat
+                if getattr(sys, "frozen", False):
+                    # PyInstaller ile derlenmiş
+                    os.system("taskkill /F /IM MerlinMakro.exe")
+                    os.system("taskkill /F /IM Launcher.exe")
+                else:
+                    # Geliştirme modu
+                    os._exit(0)
+
                 return True
     except Exception as e:
         print(f"Download failed: {e}")
