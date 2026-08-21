@@ -256,11 +256,11 @@ def download_update(save_path):
                 uninstall_path = r"C:\Program Files (x86)\MerlinMakro\unins000.exe"
                 if os.path.exists(uninstall_path):
                     subprocess.Popen([uninstall_path, "/SILENT"], shell=True)
-                    time.sleep(3)  # Uninstall'ın tamamlanması için bekle
+                    time.sleep(5)  # Uninstall'ın tamamlanması için bekle (arttırıldı)
 
                 # 2. Yeni setup'ı çalıştır
                 print("Installing new version...")
-                subprocess.Popen([save_path, "/VERYSILENT", "/SUPPRESSMSGBOXES"], shell=True)
+                subprocess.Popen([save_path, "/VERYSILENT", "/SUPPRESSMSGBOXES", "/DIR=C:\\Program Files (x86)\\MerlinMakro"], shell=True)
 
                 # 3. Uygulamayı kapat
                 if getattr(sys, "frozen", False):

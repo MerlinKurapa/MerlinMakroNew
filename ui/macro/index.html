@@ -101,6 +101,27 @@
     </footer>
   </div>
 
+  <!-- Edit Modal -->
+  <div id="edit-modal" class="modal">
+    <div class="modal-content">
+      <h3 id="modal-title">Slot Düzenle</h3>
+      <div class="modal-form">
+        <label>
+          <span>X Koordinatı</span>
+          <input type="number" id="edit-x" min="0" max="9999" />
+        </label>
+        <label>
+          <span>Y Koordinatı</span>
+          <input type="number" id="edit-y" min="0" max="9999" />
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button class="action danger" id="modal-cancel">İptal</button>
+        <button class="action" id="modal-save">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>

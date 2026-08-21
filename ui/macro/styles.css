@@ -307,6 +307,61 @@ input[type="number"] {
   color: var(--muted);
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.show { display: flex; }
+
+.modal-content {
+  background: rgba(15,23,42,0.95);
+  border: 1px solid rgba(56,189,248,0.3);
+  border-radius: 12px;
+  padding: 20px;
+  width: 300px;
+  max-width: 90%;
+}
+
+.modal-content h3 {
+  margin: 0 0 16px 0;
+  color: var(--accent);
+  font-size: 16px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-form label {
+  margin: 0;
+}
+
+.modal-form input {
+  margin-top: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.modal-actions button {
+  flex: 1;
+  margin-top: 0;
+}
+
 #status { color: var(--accent); font-weight: 700; }
 
 .rgb-text {

@@ -52,12 +52,13 @@ function renderCoords(points, meta) {
     if (m.locked) row.classList.add("locked");
     row.innerHTML = `
       <span>Slot ${i + 1}</span>
-      <input type="number" data-slot="${i}" data-axis="x" value="${pt[0]}" min="0" max="9999" />
-      <input type="number" data-slot="${i}" data-axis="y" value="${pt[1]}" min="0" max="9999" />
+      <input type="number" data-slot="${i}" data-axis="x" value="${pt[0]}" min="0" max="9999" readonly />
+      <input type="number" data-slot="${i}" data-axis="y" value="${pt[1]}" min="0" max="9999" readonly />
       <div class="row-actions">
         <button class="row-btn danger" data-act="delete" data-slot="${i}" title="Sil">🗑</button>
         <button class="row-btn ${m.locked ? "active" : ""}" data-act="lock" data-slot="${i}" title="Kilitle">🔒</button>
         <button class="row-btn ${m.disabled ? "active" : ""}" data-act="stop" data-slot="${i}" title="Durdur">⏹</button>
+        <button class="row-btn" data-act="edit" data-slot="${i}" title="Düzenle">✏️</button>
       </div>
     `;
     row.addEventListener("click", (e) => {
@@ -69,14 +70,18 @@ function renderCoords(points, meta) {
     list.appendChild(row);
   });
 
-  list.querySelectorAll("input").forEach((inp) => {
-    inp.addEventListener("change", () => {
-      const slot = Number(inp.dataset.slot);
-      const xInp = list.querySelector(`input[data-slot="${slot}"][data-axis="x"]`);
-      const yInp = list.querySelector(`input[data-slot="${slot}"][data-axis="y"]`);
-      window.pywebview.api.set_coord(slot, Number(xInp.value), Number(yInp.value));
+  list.querySelectorAll(".row-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const slot = Number(btn.dataset.slot);
+      const act = btn.dataset.act;
+      if (act === "delete") window.pywebview.api.delete_coord(slot);
+      if (act === "lock") window.pywebview.api.toggle_lock(slot);
+      if (act === "stop") window.pywebview.api.toggle_disable(slot);
+      if (act === "edit") openEditModal(slot);
     });
   });
+}
 
   list.querySelectorAll(".row-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -108,6 +113,37 @@ function renderSliders(settings) {
     });
   });
 }
+
+let editingSlot = null;
+
+function openEditModal(slot) {
+  editingSlot = slot;
+  const list = $("coord-list");
+  const xInp = list.querySelector(`input[data-slot="${slot}"][data-axis="x"]`);
+  const yInp = list.querySelector(`input[data-slot="${slot}"][data-axis="y"]`);
+  
+  $("edit-x").value = xInp.value;
+  $("edit-y").value = yInp.value;
+  $("modal-title").textContent = `Slot ${slot + 1} Düzenle`;
+  $("edit-modal").classList.add("show");
+}
+
+function closeEditModal() {
+  $("edit-modal").classList.remove("show");
+  editingSlot = null;
+}
+
+$("modal-cancel").addEventListener("click", closeEditModal);
+
+$("modal-save").addEventListener("click", () => {
+  if (editingSlot !== null) {
+    const x = Number($("edit-x").value);
+    const y = Number($("edit-y").value);
+    window.pywebview.api.set_coord(editingSlot, x, y);
+    closeEditModal();
+    toast("Koordinat güncellendi");
+  }
+});
 
 window.onCoordsUpdated = (points, meta) => renderCoords(points, meta);
 window.onCaptureState = (active) => {
