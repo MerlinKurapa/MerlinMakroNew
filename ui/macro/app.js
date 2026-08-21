@@ -52,8 +52,8 @@ function renderCoords(points, meta) {
     if (m.locked) row.classList.add("locked");
     row.innerHTML = `
       <span>Slot ${i + 1}</span>
-      <input type="number" data-slot="${i}" data-axis="x" value="${pt[0]}" min="0" max="9999" ${m.locked ? "readonly" : ""} />
-      <input type="number" data-slot="${i}" data-axis="y" value="${pt[1]}" min="0" max="9999" ${m.locked ? "readonly" : ""} />
+      <input type="number" data-slot="${i}" data-axis="x" value="${pt[0]}" min="0" max="9999" />
+      <input type="number" data-slot="${i}" data-axis="y" value="${pt[1]}" min="0" max="9999" />
       <div class="row-actions">
         <button class="row-btn danger" data-act="delete" data-slot="${i}" title="Sil">🗑</button>
         <button class="row-btn ${m.locked ? "active" : ""}" data-act="lock" data-slot="${i}" title="Kilitle">🔒</button>

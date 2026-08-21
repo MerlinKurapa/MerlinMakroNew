@@ -327,6 +327,16 @@ class MacroEngine:
             self.status = f"Slot {slot + 1} yakalandı"
             self._push_status()
 
+    def add_current_coord_to_slot(self):
+        x, y = pdi.position()
+        pts = list(self.points)
+        pts.append((int(x), int(y)))
+        self.points = pts
+        self.capture_slot = len(self.points) - 1
+        self._push_coords()
+        self.status = f"Slot {len(self.points)} eklendi: ({int(x)}, {int(y)})"
+        self._push_status()
+
     def set_setting(self, key, value):
         mapped = {
             "move_pause": "move_pause",
@@ -601,6 +611,7 @@ def setup_hotkeys():
     keyboard.add_hotkey("f3", ENGINE.toggle_bag)
     keyboard.on_press_key(79, lambda _: ENGINE.toggle_skill())
     keyboard.add_hotkey("f6", ENGINE.capture_once)
+    keyboard.add_hotkey("f7", ENGINE.add_current_coord_to_slot)
     print("Hotkeys setup complete")
 
 

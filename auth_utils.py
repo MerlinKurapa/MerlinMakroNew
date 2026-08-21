@@ -202,7 +202,7 @@ def login_async(email, password, remember_me, on_success, on_error):
 
 # GitHub Update System
 GITHUB_REPO = "MerlinKurapa/MerlinMakroNew"  # GitHub repository bilgisi
-CURRENT_VERSION = "6.0"  # Mevcut sürüm - her güncellemede bunu değiştirin
+CURRENT_VERSION = "6.1"  # Mevcut sürüm - her güncellemede bunu değiştirin
 
 
 def check_github_update():
